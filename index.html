@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Valentine 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    text-align:center;
+    background:linear-gradient(to right,#ff758c,#ff7eb3);
+    color:white;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+.page{
+    display:none;
+    padding:40px 20px;
+    min-height:100vh;
+}
+
+.active{
+    display:block;
+}
+
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.yes{
+    background:white;
+    color:#ff4b7d;
+}
+
+.no{
+    background:#ff4b7d;
+    color:white;
+}
+
+.next-btn{
+    background:white;
+    color:#ff4b7d;
+}
+
+.letter{
+    background:white;
+    color:#ff4b7d;
+    padding:20px;
+    border-radius:15px;
+    width:360px;
+    height:300px;
+    margin:auto;
+    text-align:left;
+    line-height:1.6;
+    overflow-y:auto;
+}
+
+img{
+    border-radius:20px;
+    margin-top:20px;
+}
+
+/* BLUE HEARTS */
+.blue-heart{
+    position:fixed;
+    top:0;
+    font-size:25px;
+    animation: fall 3s linear forwards;
+    pointer-events:none;
+    will-change: transform;
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>Will You Be My Valentine? 💖</h1>
+    <button class="yes" onclick="goToPage('page2')">Yes 💕</button>
+    <button class="no" id="noBtn">No 😏</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>🎁 Gift 1 🎁</h1>
+    <div style="font-size:120px;">💐 🍫</div>
+    <button class="next-btn" onclick="goToPage('page3')">Next ➡</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+    <h2>📸Happy Love Anniversary Man❤️</h2>
+    <img src="ashu.jpeg" width="250">
+    <br>
+    <button class="next-btn" onclick="goToPage('page4')">Next ➡</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+    <h2>💌 A Letter For You</h2>
+
+    <div class="letter">
+Heyy MY MAN 😘,<br><br>
+Happy love anniversary da thangoo and happy valentine day da 🫂🫂🫂💋💋successfully 3 years completed 😍💗🫶🏻yepavume ithe love oda una happy ah pathupen da thangoo 😘💞I will always be with you till my end of my life 🥰💗🤌🏻ivalo nal yepdi pochu nu theriyala ipo tha love panna mari iruku athukulla 3 years aachu yepavume onna irukanum each other support pannitu onna senthu grow agurom mass katurom 🤩💖Love you so much da thangam 😘🤌🏻💓
+ Aana oru truth — I’m really lucky to have you da 💖<br><br>
+LOVE YOU FOREVER 🩵🥰<br><br>
+---Ashu🩵
+    </div>
+
+    <button class="next-btn" onclick="goToPage('page5')">Final Surprise ➡</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+    <h1 onclick="toggleHearts()" style="cursor:pointer;">🧸</h1>
+    <h2>Love you lotsss da thangamayiluuuuuu💜</h2>
+    <p>(Touch Teddy 😌)</p>
+</div>
+
+<script>
+
+function goToPage(pageId){
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+    document.getElementById(pageId).classList.add("active");
+    window.scrollTo(0,0);
+}
+
+/* No button run away */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", function(){
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*80+"%";
+    noBtn.style.top=Math.random()*80+"%";
+});
+
+/* BLUE HEART RAIN */
+let heartInterval;
+let raining = false;
+
+function toggleHearts(){
+    if(!raining){
+        raining = true;
+        heartInterval = setInterval(createHeart, 150);
+    }else{
+        raining = false;
+        clearInterval(heartInterval);
+    }
+}
+
+function createHeart(){
+    let heart = document.createElement("div");
+    heart.className = "blue-heart";
+    heart.innerHTML = "🩵";
+    heart.style.left = Math.random() * (window.innerWidth - 30) + "px";
+    heart.style.fontSize = (20 + Math.random()*20) + "px"; // random size for fun
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },3000);
+}
+</script>
+
+</body>
+</html>
